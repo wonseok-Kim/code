@@ -23,32 +23,19 @@ void AnimSpriteComponent::Update(float deltaTime)
 
 	if (mAnimTextures.size() > 0)
 	{
-		int framesCount;
-		int outOfFrame;
-		bool bCyclic = true;
-		if (mCurrMotion < 0)
-		{
-			framesCount = mAnimTextures.size();
-			outOfFrame = mAnimTextures.size();
-		}
-		else
-		{
-			IdxRange range = mMotionRangeMap[mCurrMotion];
-			framesCount = range.end - range.start + 1;
-			outOfFrame = range.end + 1;
-			bCyclic = range.bCyclic;
-		}
-		
+		IdxRange range = mMotionRangeMap[mCurrMotion];
+		int framesCount = range.end - range.start + 1;
+		int outOfFrame = range.end + 1;				
 		
 		mCurrFrame += mAnimFPS * deltaTime;
-		while (bCyclic && mCurrFrame >= outOfFrame)
+		while (mCurrFrame >= outOfFrame)
 		{
-			mCurrFrame -= framesCount;
+			if (range.bCyclic)
+				mCurrFrame -= framesCount;
+			else
+				mCurrFrame = outOfFrame - 1;
 		}
-		if (!bCyclic && mCurrFrame >= outOfFrame)
-		{
-			mCurrFrame = outOfFrame - 1;
-		}
+		
 
 		// Set the current texture
 		SetTexture(mAnimTextures[static_cast<int>(mCurrFrame)]);
@@ -58,11 +45,14 @@ void AnimSpriteComponent::Update(float deltaTime)
 void AnimSpriteComponent::SetAnimTextures(const std::vector<SDL_Texture*>& textures)
 {
 	mAnimTextures = textures;
+	mMotionRangeMap.clear();
 	if (mAnimTextures.size() > 0)
 	{
 		// Set the active texture to first frame
 		mCurrFrame = 0.0f;
 		SetTexture(mAnimTextures[0]);
+		CategorizeAnimTextures(-1, 0, mAnimTextures.size() - 1);
+		SetCurrentMotion(-1);
 	}
 }
 
