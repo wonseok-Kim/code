@@ -6,12 +6,15 @@
 // See LICENSE in root directory for full details.
 // ----------------------------------------------------------------
 
-#include "Game.h"
-#include "SDL/SDL_image.h"
 #include <algorithm>
+
 #include "Actor.h"
-#include "SpriteComponent.h"
 #include "BGSpriteComponent.h"
+#include "Character.h"
+#include "Game.h"
+#include "Math.h"
+#include "SDL/SDL_image.h"
+#include "SpriteComponent.h"
 
 Game::Game()
 :mWindow(nullptr)
@@ -86,7 +89,7 @@ void Game::ProcessInput()
 		mIsRunning = false;
 	}
 
-	// Process ship input	
+	mCharacter->ProcessKeyboard(state);
 }
 
 void Game::UpdateGame()
@@ -151,6 +154,9 @@ void Game::GenerateOutput()
 
 void Game::LoadData()
 {
+	mCharacter = new Character(this);
+	mCharacter->SetPosition(Vector2(100.f, 384.f));
+	mCharacter->SetScale(1.5f);
 
 }
 

@@ -7,10 +7,13 @@
 // ----------------------------------------------------------------
 
 #pragma once
-#include "SDL/SDL.h"
-#include <unordered_map>
+
 #include <string>
+#include <unordered_map>
 #include <vector>
+
+#include "Character.h"
+#include "SDL/SDL.h"
 
 class Game
 {
@@ -53,5 +56,5 @@ private:
 	bool mUpdatingActors;
 
 	// Game-specific
-	
+	Character* mCharacter;
 };

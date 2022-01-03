@@ -79,6 +79,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <ExceptionHandling>Sync</ExceptionHandling>
       <ForcedIncludeFiles>Debug.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -105,6 +106,7 @@ xcopy "$(ProjectDir)\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y</C
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <ExceptionHandling>Sync</ExceptionHandling>
       <ForcedIncludeFiles>Debug.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

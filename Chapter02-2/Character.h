@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Actor.h"
+#include "AnimSpriteComponent.h"
 
 class Character : public Actor
 {
@@ -12,5 +13,9 @@ public:
 	void ProcessKeyboard(const uint8_t* state);
 
 private:
+	enum eMotion {
+		Walking, Jumping, Punch
+	};
+	AnimSpriteComponent* mAsc;
 };
 
