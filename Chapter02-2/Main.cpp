@@ -6,21 +6,31 @@
 // See LICENSE in root directory for full details.
 // ----------------------------------------------------------------
 
+#include <iostream>
+#include <memory>
+
 #include "Game.h"
+
+struct AtExit
+{
+	~AtExit() 
+	{ 		
+		_CrtDumpMemoryLeaks(); 
+	}
+} doAtExit;
 
 int main(int argc, char** argv)
 {	
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);	
+
 	Game game;
 	bool success = game.Initialize();	
 	if (success)
 	{
 		game.RunLoop();
 	}
-	game.Shutdown();
+	game.Shutdown();		
 
-	_CrtDumpMemoryLeaks();
 	return 0;
 }
 
