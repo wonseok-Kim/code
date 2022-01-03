@@ -15,6 +15,7 @@
 #include "Math.h"
 #include "SDL/SDL_image.h"
 #include "SpriteComponent.h"
+#include "TileMapComponent.h"
 
 Game::Game()
 :mWindow(nullptr)
@@ -154,9 +155,27 @@ void Game::GenerateOutput()
 
 void Game::LoadData()
 {
-	mCharacter = new Character(this);
-	mCharacter->SetPosition(Vector2(100.f, 384.f));
-	mCharacter->SetScale(1.5f);
+	//mCharacter = new Character(this);
+	//mCharacter->SetPosition(Vector2(100.f, 384.f));
+	//mCharacter->SetScale(1.5f);
+
+	Actor* temp = new Actor(this);
+	temp->SetPosition(Vector2(512.f, 384.f));
+
+	TileMapComponent* tileMap = new TileMapComponent(temp, 3);
+	tileMap->SetTexture(GetTexture("Assets/Tiles.png"));
+	tileMap->SetTileSetInfo(24, 8);
+	tileMap->ImportMap("Assets/MapLayer1.csv", 24, 32);
+
+	tileMap = new TileMapComponent(temp, 2);
+	tileMap->SetTexture(GetTexture("Assets/Tiles.png"));
+	tileMap->SetTileSetInfo(24, 8);
+	tileMap->ImportMap("Assets/MapLayer2.csv", 24, 32);
+
+	tileMap = new TileMapComponent(temp, 1);
+	tileMap->SetTexture(GetTexture("Assets/Tiles.png"));
+	tileMap->SetTileSetInfo(24, 8);
+	tileMap->ImportMap("Assets/MapLayer3.csv", 24, 32);
 
 }
 

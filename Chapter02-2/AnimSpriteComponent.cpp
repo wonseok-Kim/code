@@ -34,8 +34,7 @@ void AnimSpriteComponent::Update(float deltaTime)
 				mCurrFrame -= framesCount;
 			else
 				mCurrFrame = outOfFrame - 1;
-		}
-		
+		}		
 
 		// Set the current texture
 		SetTexture(mAnimTextures[static_cast<int>(mCurrFrame)]);
