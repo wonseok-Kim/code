@@ -6,9 +6,6 @@
 // See LICENSE in root directory for full details.
 // ----------------------------------------------------------------
 
-#include <iostream>
-#include <memory>
-
 #include "Game.h"
 
 struct AtExit
